@@ -30,7 +30,7 @@ public class Tracker {
                 result[count++] = items[i];
             }
         }
-        return Arrays.copyOf(result, size);
+        return Arrays.copyOf(result, count);
     }
 
     private int indexOf(int id) {
