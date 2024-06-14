@@ -25,7 +25,7 @@ public class StartUI {
         }
     }
 
-    private static void findItemByName(Input input, Tracker tracker) {
+    public static void findItemByName(Input input, Tracker tracker) {
         System.out.println("=== Вывод заявок по имени ===");
         String name = input.askStr("Enter name: ");
         Item[] items = tracker.findByName(name);
@@ -38,7 +38,7 @@ public class StartUI {
         }
     }
 
-    private static void findItemById(Input input, Tracker tracker) {
+    public static void findItemById(Input input, Tracker tracker) {
         System.out.println("=== Вывод заявки по id ===");
         int id = input.askInt("Enter id: ");
         Item item = tracker.findById(id);
@@ -50,7 +50,7 @@ public class StartUI {
         }
     }
 
-    private static void deleteItem(Input input, Tracker tracker) {
+    public static void deleteItem(Input input, Tracker tracker) {
         System.out.println("=== Удаление заявки ===");
         int id = input.askInt("Enter id: ");
         Item item = tracker.findById(id);
@@ -58,7 +58,7 @@ public class StartUI {
         System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
     }
 
-    private static void replaceItem(Input input, Tracker tracker) {
+    public static void replaceItem(Input input, Tracker tracker) {
         System.out.println("=== Редактирование заявки ===");
         int id = input.askInt("Enter id: ");
         String name = input.askStr("Enter name: ");
@@ -70,7 +70,7 @@ public class StartUI {
         }
     }
 
-    private static void findAllItems(Tracker tracker) {
+    public static void findAllItems(Tracker tracker) {
         System.out.println("=== Вывод всех заявок ===");
         Item[] items = tracker.findAll();
         if (items.length > 0) {
@@ -83,7 +83,7 @@ public class StartUI {
         }
     }
 
-    private static void createItem(Input input, Tracker tracker) {
+    public static void createItem(Input input, Tracker tracker) {
         System.out.println("=== Создание новой заявки ===");
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
