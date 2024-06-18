@@ -14,11 +14,23 @@ public class FindEl {
         return result;
     }
 
-    public static void main(String[] args) {
+    public static boolean sent(String value, String[] abuses) throws ElementAbuseException {
+        return true;
+    }
+
+    public static void process(String[] values, String key, String[] abuses) {
         try {
-            indexOf(new String[]{"Элемент1", "Элемент3", "Элемент7"}, "Элемент4");
-        } catch (ElementNotFoundException e) {
+            if (indexOf(values, key) != -1) {
+                sent(key, abuses);
+            }
+        } catch (ElementAbuseException ea) {
+            ea.printStackTrace();
+        } catch (ElementNotFoundException en) {
+            en.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
+        } catch (Throwable th) {
+            th.printStackTrace();
         }
     }
 }
