@@ -5,7 +5,7 @@ public class Find {
         if (index < 0 || index >= data.length) {
             throw new IllegalArgumentException("Index out of bound");
         }
-            return data[index];
-        }
+        return data[index];
     }
+}
 
