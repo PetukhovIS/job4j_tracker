@@ -17,7 +17,7 @@ class AppleStoreTest {
         customers.add(new Customer("Iryna", 1250));
         customers.add(new Customer("Elena", 750));
         customers.add(new Customer("Rail", 950));
-        int count = 1;
+        int count = 4;
         AppleStore appleStore = new AppleStore(customers, count);
         String customer = appleStore.getLastHappyCustomer();
         assertThat(customer).isEqualTo("Alexei");
