@@ -30,22 +30,24 @@ public class AnalyzeByMap {
     }
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
-        Map<String, Integer> subjectScores = new HashMap<>();
-        Map<String, Integer> subjectCounts = new HashMap<>();
+        Map<String, int[]> subjectData = new HashMap<>();
 
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                String subjectName = subject.name();
-                int score = subject.score();
-                subjectScores.put(subjectName, subjectScores.getOrDefault(subjectName, 0) + score);
-                subjectCounts.put(subjectName, subjectCounts.getOrDefault(subjectName, 0) + 1);
+                subjectData.merge(subject.name(), new int[]{subject.score(), 1},
+                        (oldVal, newVal) -> {
+                            oldVal[0] += newVal[0];
+                            oldVal[1] += newVal[1];
+                            return oldVal;
+                        });
             }
         }
+
         List<Label> result = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : subjectScores.entrySet()) {
+        for (Map.Entry<String, int[]> entry : subjectData.entrySet()) {
             String subjectName = entry.getKey();
-            int totalScore = entry.getValue();
-            int count = subjectCounts.get(subjectName);
+            int totalScore = entry.getValue()[0];
+            int count = entry.getValue()[1];
             double averageScore = (double) totalScore / count;
             result.add(new Label(subjectName, averageScore));
         }
@@ -67,12 +69,14 @@ public class AnalyzeByMap {
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        Map<String, Integer> subjectScores = new LinkedHashMap<>();
+        Map<String, Integer> subjectScores = new HashMap<>();
+
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                subjectScores.put(subject.name(), subjectScores.getOrDefault(subject.name(), 0) + subject.score());
+                subjectScores.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
+
         Label best = null;
         for (Map.Entry<String, Integer> entry : subjectScores.entrySet()) {
             if (best == null || entry.getValue() > best.score()) {
